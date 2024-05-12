@@ -1,4 +1,4 @@
-namespace APBD_Zadanie_5
+namespace Zadanie7
 {
     public class WeatherForecast
     {
