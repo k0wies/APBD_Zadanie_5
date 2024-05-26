@@ -4,16 +4,16 @@ namespace Zadanie7.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class TripController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<TripController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public TripController(ILogger<TripController> logger)
         {
             _logger = logger;
         }
