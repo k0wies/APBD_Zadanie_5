@@ -1,6 +1,6 @@
 namespace Zadanie7.Interfaces;
 
-public interface ITripDbRepository
+public interface IClientRepository
 {
     
 }
