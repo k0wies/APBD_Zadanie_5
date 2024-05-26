@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers/" />
+    <Folder Include="Interfaces/" />
+    <Folder Include="Repositories/" />
     <_ContentIncludedByDefault Remove="APBD_Zadanie_5\appsettings.Development.json" />
     <_ContentIncludedByDefault Remove="APBD_Zadanie_5\appsettings.json" />
     <_ContentIncludedByDefault Remove="APBD_Zadanie_5\Properties\launchSettings.json" />
