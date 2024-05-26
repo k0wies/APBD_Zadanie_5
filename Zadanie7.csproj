@@ -17,4 +17,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="APBD_Zadanie_5\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="APBD_Zadanie_5\appsettings.json" />
+    <_ContentIncludedByDefault Remove="APBD_Zadanie_5\Properties\launchSettings.json" />
+  </ItemGroup>
+
 </Project>
