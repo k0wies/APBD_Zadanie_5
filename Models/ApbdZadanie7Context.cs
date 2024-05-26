@@ -69,10 +69,26 @@ public class ApbdZadanie7Context : DbContext
                         .HasForeignKey("IdTrip")
                         .OnDelete(DeleteBehavior.ClientSetNull)
                         .HasConstraintName("Country_Trip_Trip"),
+                    g => g.HasOne<Country>().WithMany()
+                        .HasForeignKey("IdCountry")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("Country_Trip_Country")
+                    
                 );
         });
 
+        modelBuilder.Entity<Trip>(entity =>
+        {
+            entity.HasKey(e => e.IdTrip).HasName("Trip_pk");
 
+            entity.ToTable("Trip", "trip");
+
+            entity.Property(e => e.IdTrip).ValueGeneratedNever();
+            entity.Property(e => e.DateFrom).HasColumnType("datetime");
+            entity.Property(e => e.DateTo).HasColumnType("datetime");
+            entity.Property(e => e.Description).HasMaxLength(120);
+            entity.Property(e => e.Name).HasMaxLength(120);
+        });
 
 
 
