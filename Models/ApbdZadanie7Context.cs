@@ -89,8 +89,9 @@ public class ApbdZadanie7Context : DbContext
             entity.Property(e => e.Description).HasMaxLength(120);
             entity.Property(e => e.Name).HasMaxLength(120);
         });
-
+        
 
 
     }
+   
 }

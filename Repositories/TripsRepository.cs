@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Zadanie7.Interfaces;
 using Zadanie7.Models;
 using Zadanie7.Models.DTOs;
+using Zadanie7.Models.DTOs.Request;
 
 namespace Zadanie7.Repositories;
 
@@ -34,5 +35,49 @@ public class TripsRepository : ITripsRepository
                                 LastName = e.IdClientNavigation.LastName })
                 }).ToListAsync();
         return result;
+    }
+
+    public async Task AddTripToClientAsync(int idTrip, AddTripToClientRequestDTO dto)
+    {
+        bool ClientExists = await _context.Clients.AnyAsync(row => row.Pesel == dto.Pesel);
+
+        Client wantedClient;
+        if (!ClientExists)
+        {
+            wantedClient = new Client
+            {
+                IdClient = await _context.Clients.Select(row => row.IdClient).MaxAsync() + 1,
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                Telephone = dto.Telephone,
+                Pesel = dto.Pesel
+            };
+
+            await _context.Clients.AddAsync(wantedClient);
+            await _context.SaveChangesAsync();
+        }
+        else
+        {
+            wantedClient = await _context.Clients.FirstOrDefaultAsync(row => row.Pesel == dto.Pesel);
+        }
+
+        bool TripExists = await _context.Trips.AnyAsync(row => row.IdTrip == idTrip);
+        if (!TripExists) throw new Exception($"There is no such trip with ID: {idTrip}!");
+
+        bool isClientAlreadyReservedThisTrip = await _context.ClientTrips.AnyAsync(row => row.IdClient == wantedClient.IdClient);
+        if (isClientAlreadyReservedThisTrip) throw new Exception("Client is already reserved that trip!");
+        {
+            
+        }
+        
+        await _context.ClientTrips.AddAsync(new ClientTrip
+        {
+            IdClient = wantedClient.IdClient,
+            IdTrip = idTrip,
+            RegisteredAt = DateTime.Now,
+            PaymentDate = dto.PaymentDate
+        });
+        await _context.SaveChangesAsync();
     }
 }
