@@ -18,5 +18,5 @@ public class AddTripToClientRequestDTO
     [NotNull]
     public string IdTrip { get; set; }
     public string TripName { get; set; }
-    public DateTime? PaymentDate { get; set; }
+    public DateTime PaymentDate { get; set; }
 }
